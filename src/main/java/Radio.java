@@ -1,10 +1,26 @@
 public class Radio {
     private int currentStation;
     private int currentVolume;
+    private int maxStation;
+
+    private int maxVolume;
+
+
+    public Radio() {
+        maxStation = 9;
+        maxVolume = 100;
+
+    }
+    public Radio (int stationsCount){
+       this.maxStation = stationsCount - 1;
+
+    }
+
 
     public int getCurrentStation() {
         return currentStation;
     }
+
 
     public int getCurrentVolume() {
         return currentVolume;
@@ -15,7 +31,7 @@ public class Radio {
         if (currentStation < 0) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation > maxStation) {
             return;
         }
         this.currentStation = currentStation;
@@ -25,48 +41,80 @@ public class Radio {
         if (currentVolume < 0) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
-    public void stationNumber() {
-        if (currentStation >= 9) {
+    // Текущая станция
+    public void station() {
+        if (currentStation >= maxStation) {
             currentStation++;
-
         }
-
     }
 
+    // следущая
     public void nextStation() {
-        if (currentStation < 9) {
+        if (currentStation > 0) {
+            currentStation++;
+        }
+    }
+
+    //Предыдущая станция
+    public void pastStation() {
+        if (currentStation > 0) {
+            currentStation--;
+        }
+    }
+
+    // Станция С 9 на 0
+    public void lopedStation() {
+        if (currentStation >= maxStation) {
             currentStation++;
         } else {
             currentStation = 0;
         }
     }
 
-    public void pastStation() {
+    // Станция с 0 на 9
+    public void reverseStation() {
         if (currentStation > 0) {
             currentStation--;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
-
     }
 
+    //Текущая громкость
     public void volume() {
+        if (currentVolume <= 0) {
+            currentVolume++;
+        }
+    }
+
+    //Повышение громкости
+    public void nextVolume() {
         if (currentVolume > 0) {
             currentVolume++;
         }
     }
 
+    //граничная
     public void pastVolume() {
-        if (currentVolume > 0) {
-            currentVolume--;
+        if (currentVolume >= maxVolume) {
+            currentVolume++;
+        } else {
+            currentVolume = maxVolume;
         }
     }
 
+    //
+    public void volumem() {
+        if (currentVolume > 0) {
+            currentVolume--;
+        }
 
+
+    }
 }
